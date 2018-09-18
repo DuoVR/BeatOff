@@ -2,7 +2,7 @@
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
-.playerdata {
+.playerdata{
   border: 1px solid #ddd;
   padding: 12px;
   text-align: center;
@@ -19,6 +19,14 @@
 
 .forms {
   width: 100%;
+}
+
+#player1Name {
+  color: red;
+}
+
+#player2Name {
+  color: blue;
 }
 
 button {

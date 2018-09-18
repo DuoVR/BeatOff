@@ -1,14 +1,22 @@
 var player1 = {};
 var player2 = {};
 var union = [];
+var finalUnion = [];
 var url1 = 'https://scoresaber.com/u/76561198006244519&page=1&sort=1';
 var url2 = 'https://scoresaber.com/u/76561198011570317&page=1&sort=1';
 var count = 0;
 var newHtml = "";
+var player1Name = "Player 1";
+var player2Name = "Player 2";
+var needPlayer1 = true;
+var needPlayer2 = true;
+var count1 = 0;
+var count2 = 0;
 
 $(document).ready(function() {
   $("#loading").hide();
   $("#playerscores").hide();
+  $("#playerheader").hide();
   $.ajaxPrefilter(function(options) {
     if (options.crossDomain && jQuery.support.cors) {
       var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
@@ -21,10 +29,14 @@ function getData() {
   player1 = {};
   player2 = {};
   union = [];
+  finalUnion = [];
   count = 0;
+  needPlayer1 = true;
+  needPlayer2 = true;
   $("#loading").show();
   $("table.playerdata tbody").html("");
   $("#playerscores").hide();
+  $("#playerheader").hide();
   getSongs(organize);
 }
 
@@ -35,6 +47,11 @@ function getSongs(callback) {
 
     $.get(url1, function(data1) {
       var html1 = $(data1);
+      if (needPlayer1) {
+        var player1NameWithSpace = html1.find("h5.title.is-5 a").html();
+        player1Name = $.trim(player1NameWithSpace);
+        needPlayer1 = false;
+      }
       var table1 = html1.find("table");
       var tbody1 = table1.find("tbody");
       tbody1.children().each(function() {
@@ -50,11 +67,19 @@ function getSongs(callback) {
         };
         union.push(songObj1);
       });
-      callback();
+      count1++;
+      if (count1 > 4) {
+        callback();
+      }
     });
 
     $.get(url2, function(data2) {
       var html2 = $(data2);
+      if (needPlayer2) {
+        var player2NameWithSpace = html2.find("h5.title.is-5 a").html();
+        player2Name = $.trim(player2NameWithSpace);
+        needPlayer2 = false;
+      }
       var table2 = html2.find("table");
       var tbody2 = table2.find("tbody");
       tbody2.children().each(function() {
@@ -69,14 +94,19 @@ function getSongs(callback) {
         };
         union.push(songObj2);
       });
-      callback();
+      count2++;
+      if (count2 > 4) {
+        callback();
+      }
     });
   }
 }
 
 function organize() {
   count++;
-  if (count === 10) {
+  if (count > 1) {
+    $("#player1Name").html(player1Name);
+    $("#player2Name").html(player2Name);
     union.sort(function(a, b) {
       return b.pp - a.pp
     });
@@ -85,7 +115,7 @@ function organize() {
 }
 
 function calculate() {
-  var finalUnion = [];
+  finalUnion = [];
   for (let i = 0; i < union.length; i++) {
     var song = union[i];
     if (finalUnion.indexOf(song.song) < 0) {
@@ -167,6 +197,7 @@ function calculate() {
 
       newHtml += "</th></tr>";
       tableHtml.append(newHtml);
+      $("#playerheader").show();
       $("#playerscores").show();
       $("#loading").hide();
     }
