@@ -7,8 +7,6 @@ var count = 0;
 var newHtml = "";
 
 $(document).ready(function() {
-  console.log("ready!");
-
   $.ajaxPrefilter(function(options) {
     if (options.crossDomain && jQuery.support.cors) {
       var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
@@ -30,8 +28,6 @@ function getSongs(callback) {
   for (let i = 1; i < 6; i++) {
     var url1 = $('form input.p1form').val() + '&page=' + i.toString() + '&sort=1';
     var url2 = $('form input.p2form').val() + '&page=' + i.toString() + '&sort=1';
-    console.log(url1);
-    console.log(url2);
 
     $.get(url1, function(data1) {
       var html1 = $(data1);
@@ -44,10 +40,6 @@ function getSongs(callback) {
         var pp1 = parseFloat($(this).find("th.score span.scoreTop.ppValue").text());
 
         player1[song1] = [pp1, songHtml1, ppHtml1];
-        console.log(url1);
-        console.log("PLAYER1");
-        console.log(song1);
-        console.log(pp1);
         var songObj1 = {
           "song": song1,
           "pp": pp1
@@ -67,9 +59,6 @@ function getSongs(callback) {
         var song2 = $(this).find("th.song div div a span.songTop.pp").text();
         var pp2 = parseFloat($(this).find("th.score span.scoreTop.ppValue").text());
         player2[song2] = [pp2, songHtml2, ppHtml2];
-        console.log("PLAYER2");
-        console.log(song2);
-        console.log(pp2);
         var songObj2 = {
           "song": song2,
           "pp": pp2
@@ -87,9 +76,6 @@ function organize() {
     union.sort(function(a, b) {
       return b.pp - a.pp
     });
-    console.log(union);
-    console.log(player1);
-    console.log(player2);
     calculate();
   }
 }
@@ -179,9 +165,7 @@ function calculate() {
       }
 
       newHtml += "</th></tr>";
-      //console.log(newHtml);
       tableHtml.append(newHtml);
     }
   }
-  console.log(finalUnion);
 }
