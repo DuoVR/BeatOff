@@ -8,6 +8,7 @@ var newHtml = "";
 
 $(document).ready(function() {
   $("#loading").hide();
+  $("#playerscores").hide();
   $.ajaxPrefilter(function(options) {
     if (options.crossDomain && jQuery.support.cors) {
       var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
@@ -23,6 +24,7 @@ function getData() {
   count = 0;
   $("#loading").show();
   $("table.playerdata tbody").html("");
+  $("#playerscores").hide();
   getSongs(organize);
 }
 
@@ -165,6 +167,7 @@ function calculate() {
 
       newHtml += "</th></tr>";
       tableHtml.append(newHtml);
+      $("#playerscores").show();
       $("#loading").hide();
     }
   }
