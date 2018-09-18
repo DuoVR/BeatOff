@@ -7,6 +7,7 @@ var count = 0;
 var newHtml = "";
 
 $(document).ready(function() {
+  $("#loading").hide();
   $.ajaxPrefilter(function(options) {
     if (options.crossDomain && jQuery.support.cors) {
       var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
@@ -20,6 +21,7 @@ function getData() {
   player2 = {};
   union = [];
   count = 0;
+  $("#loading").show();
   $("table.playerdata tbody").html("");
   getSongs(organize);
 }
@@ -86,7 +88,6 @@ function calculate() {
     var song = union[i];
     if (finalUnion.indexOf(song.song) < 0) {
       finalUnion.push(song.song);
-      console.log(song.song);
 
       var player1Data = player1[song.song];
       var player2Data = player2[song.song];
@@ -109,8 +110,6 @@ function calculate() {
         p2score = player2[song.song][2];
         p2pp = player2[song.song][0];
       }
-
-      console.log(p1pp);
 
       var ppdiff = 0;
       var p1big = true;
@@ -166,6 +165,7 @@ function calculate() {
 
       newHtml += "</th></tr>";
       tableHtml.append(newHtml);
+      $("#loading").hide();
     }
   }
 }
