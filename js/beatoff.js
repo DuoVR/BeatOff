@@ -8,9 +8,6 @@ var newHtml = "";
 
 $(document).ready(function() {
   console.log("ready!");
-  player1 = {};
-  player2 = {};
-  union = [];
 
   $.ajaxPrefilter(function(options) {
     if (options.crossDomain && jQuery.support.cors) {
@@ -21,6 +18,11 @@ $(document).ready(function() {
 });
 
 function getData() {
+  player1 = {};
+  player2 = {};
+  union = [];
+  count = 0;
+  $("table.playerdata tbody").html("");
   getSongs(organize);
 }
 
@@ -32,7 +34,6 @@ function getSongs(callback) {
     console.log(url2);
 
     $.get(url1, function(data1) {
-      console.log(url1);
       var html1 = $(data1);
       var table1 = html1.find("table");
       var tbody1 = table1.find("tbody");
@@ -41,7 +42,12 @@ function getSongs(callback) {
         var ppHtml1 = $(this).find("th.score");
         var song1 = $(this).find("th.song div div a span.songTop.pp").text();
         var pp1 = parseFloat($(this).find("th.score span.scoreTop.ppValue").text());
+
         player1[song1] = [pp1, songHtml1, ppHtml1];
+        console.log(url1);
+        console.log("PLAYER1");
+        console.log(song1);
+        console.log(pp1);
         var songObj1 = {
           "song": song1,
           "pp": pp1
@@ -52,7 +58,6 @@ function getSongs(callback) {
     });
 
     $.get(url2, function(data2) {
-      console.log(url2);
       var html2 = $(data2);
       var table2 = html2.find("table");
       var tbody2 = table2.find("tbody");
@@ -62,6 +67,9 @@ function getSongs(callback) {
         var song2 = $(this).find("th.song div div a span.songTop.pp").text();
         var pp2 = parseFloat($(this).find("th.score span.scoreTop.ppValue").text());
         player2[song2] = [pp2, songHtml2, ppHtml2];
+        console.log("PLAYER2");
+        console.log(song2);
+        console.log(pp2);
         var songObj2 = {
           "song": song2,
           "pp": pp2
@@ -99,18 +107,24 @@ function calculate() {
 
       var p1score = null;
       var p2score = null;
+      var songInfo1 = null;
+      var songInfo2 = null;
+      var p1pp = null;
+      var p2pp = null;
 
       if (player1Data) {
         p1score = player1[song.song][2];
-        var p1pp = player1[song.song][0];
-        var songInfo1 = player1[song.song][1];
+        p1pp = player1[song.song][0];
+        songInfo1 = player1[song.song][1];
       }
 
       if (player2Data) {
-        var songInfo2 = player2[song.song][1];
+        songInfo2 = player2[song.song][1];
         p2score = player2[song.song][2];
-        var p2pp = player2[song.song][0];
+        p2pp = player2[song.song][0];
       }
+
+      console.log(p1pp);
 
       var ppdiff = 0;
       var p1big = true;
@@ -172,7 +186,7 @@ function calculate() {
       }
 
       newHtml += "</th></tr>";
-      console.log(newHtml);
+      //console.log(newHtml);
       tableHtml.append(newHtml);
     }
   }
