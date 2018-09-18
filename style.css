@@ -1,0 +1,42 @@
+* {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+.playerdata {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.playerdata th {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.forms {
+  width: 100%;
+}
+
+button {
+  margin: 15px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 20%;
+  font-weight: bold;
+}
+
+input {
+  margin: 15px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 40%;
+  text-align: center;
+}
