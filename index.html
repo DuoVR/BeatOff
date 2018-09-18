@@ -2,20 +2,61 @@
 <html>
 
 <head>
-    <script src="js/beatoff.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/beatoff.js"></script>
 </head>
 
 <body>
-  <div>
-    <form>
-      Player 1:<br>
-      <input type="text" name="firstname"><br>
-      Player 2:<br>
-      <input type="text" name="lastname">
-    </form>
+  <center>
+    <h1>Beat Off</h1>
+    <h3>Compare PPs With Your Friends!</h3>
+    <div>
+      <table class="forms">
+        <tr>
+          <th>
+            Player 1
+          </th>
+          <th>
+            Player 2
+          </th>
+        </tr>
+        <tr>
+          <th>
+            <form>
+              <input type="text" class="p1form">
+          </form>
+          </th>
+          <th>
+            <form>
+              <input type="text" class="p2form">
+          </form>
+          </th>
+        </tr>
+      </table>
 
-    <button class="button">Compare!</button>
-  </div>
+      <button onclick="getData()">Compare!</button>
+    </div>
+
+    <div id="playerscores">
+      <table class="playerdata">
+        <tr>
+          <th>
+          </th>
+          <th>
+            Player 1
+          </th>
+          <th>
+            Song
+          </th>
+          <th>
+            Player 2
+          </th>
+          <th>
+          </th>
+        </tr>
+      </table>
+    </div>
+  </center>
 </body>
 
 </html>
