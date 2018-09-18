@@ -141,12 +141,12 @@ function calculate() {
 
       var tableHtml = $("table.playerdata tbody");
 
-      newHtml = "<tr><th>";
+      newHtml = "<tr>";
 
       if (p1big) {
-        newHtml += "<span>+</span>";
+        newHtml += "<th style='background-color:red'>";
       } else {
-        newHtml += "<span> </span>";
+        newHtml += "<th>";
       }
 
       newHtml += "</th><th>";
@@ -172,12 +172,10 @@ function calculate() {
         newHtml += "</th>";
       }
 
-      newHtml += "<th>";
-
       if (!p1big) {
-        newHtml += "<span>+</span>";
+        newHtml += "<th style='background-color:blue'>";
       } else {
-        newHtml += "<span> </span>";
+        newHtml += "<th>";
       }
 
       newHtml += "</th></tr>";
