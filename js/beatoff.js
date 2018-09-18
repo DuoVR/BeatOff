@@ -160,13 +160,8 @@ function calculate() {
       }
 
       newHtml += "<th>";
-      if (songInfo1) {
-        newHtml += songInfo1.html();
-        newHtml += "</th>";
-      } else {
-        newHtml += songInfo2.html();
-        newHtml += "</th>";
-      }
+      newHtml += song.song;
+      newHtml += "</th>";
 
       newHtml += "<th>";
       if (p2score) {
