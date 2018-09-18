@@ -25,7 +25,7 @@ function getData() {
 }
 
 function getSongs(callback) {
-  for (let i = 1; i < 11; i++) {
+  for (let i = 1; i < 6; i++) {
     var url1 = $('form input.p1form').val() + '&page=' + i.toString() + '&sort=1';
     var url2 = $('form input.p2form').val() + '&page=' + i.toString() + '&sort=1';
     console.log(url1);
@@ -75,7 +75,7 @@ function getSongs(callback) {
 
 function organize() {
   count++;
-  if (count === 20) {
+  if (count === 10) {
     union.sort(function(a, b) {
       return b.pp - a.pp
     });
@@ -92,6 +92,7 @@ function calculate() {
     var song = union[i];
     if (finalUnion.indexOf(song.song) < 0) {
       finalUnion.push(song.song);
+      console.log(song.song);
 
       var player1Data = player1[song.song];
       var player2Data = player2[song.song];
@@ -118,6 +119,10 @@ function calculate() {
       } else {
         ppdiff = p2pp - p1pp;
         var p1big = false;
+      }
+
+      if (!p1pp) {
+        p1big = false;
       }
 
       var tableHtml = $("table.playerdata tbody");
