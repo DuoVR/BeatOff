@@ -33,6 +33,8 @@ function getData() {
   count = 0;
   needPlayer1 = true;
   needPlayer2 = true;
+  count1 = 0;
+  count2 = 0;
   $("#loading").show();
   $("table.playerdata tbody").html("");
   $("#playerscores").hide();
@@ -41,7 +43,7 @@ function getData() {
 }
 
 function getSongs(callback) {
-  for (let i = 1; i < 6; i++) {
+  for (let i = 1; i < 16; i++) {
     var url1 = $('form input.p1form').val() + '&page=' + i.toString() + '&sort=1';
     var url2 = $('form input.p2form').val() + '&page=' + i.toString() + '&sort=1';
 
@@ -68,7 +70,7 @@ function getSongs(callback) {
         union.push(songObj1);
       });
       count1++;
-      if (count1 > 4) {
+      if (count1 > 14) {
         callback();
       }
     });
@@ -92,10 +94,9 @@ function getSongs(callback) {
           "song": song2,
           "pp": pp2
         };
-        union.push(songObj2);
       });
       count2++;
-      if (count2 > 4) {
+      if (count2 > 14) {
         callback();
       }
     });
