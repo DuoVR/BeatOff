@@ -25,6 +25,12 @@ $(document).ready(function() {
   });
 });
 
+function switchScores(){
+  var tmp = $('form input.p1form').val()
+  $('form input.p2form').val() = $('form input.p2form').val()
+  $('form input.p2form').val() = tmp
+}
+
 function getData() {
   player1 = {};
   player2 = {};
