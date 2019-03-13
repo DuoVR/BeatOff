@@ -1,2 +1,2 @@
 # BeatOff
-Compare Beat Saber scores: https://duovr.github.io/BeatOff/
+Compare Beat Saber scores: https://akarnes1.github.io/BeatOff/
